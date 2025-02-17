@@ -2,11 +2,7 @@ import SwiftUI
 
 public extension Backport {
 	@ViewBuilder func navigationDestination<D: Hashable, C: View>(for data: D.Type, @ViewBuilder destination: @escaping (D) -> C) -> some View {
-		if #available(iOS 16.0, *) {
-			content.navigationDestination(for: D.self, destination: destination)
-		} else {
-			content.modifier(DestinationModifier(destination: destination))
-		}
+        content.modifier(DestinationModifier(destination: destination))
 	}
 }
 

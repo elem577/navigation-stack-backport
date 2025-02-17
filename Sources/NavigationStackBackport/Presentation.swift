@@ -2,22 +2,14 @@ import SwiftUI
 
 public extension Backport {
 	@ViewBuilder func navigationDestination<C: View>(isPresented: Binding<Bool>, @ViewBuilder destination: () -> C) -> some View {
-		if #available(iOS 16.0, *) {
-			content.navigationDestination(isPresented: isPresented, destination: destination)
-		} else {
-			content.modifier(PresentationModifier(isPresented: isPresented, destination: destination()))
-		}
+        content.modifier(PresentationModifier(isPresented: isPresented, destination: destination()))
 	}
 
 	@ViewBuilder func navigationDestination<D: Hashable, C: View>(
 		item: Binding<D?>,
 		@ViewBuilder destination: @escaping (D) -> C
 	) -> some View {
-		if #available(iOS 17.0, *) {
-			content.navigationDestination(item: item, destination: destination)
-		} else {
-			content.modifier(ItemPresentationModifier(item: item, destination: destination))
-		}
+        content.modifier(ItemPresentationModifier(item: item, destination: destination))
 	}
 }
 

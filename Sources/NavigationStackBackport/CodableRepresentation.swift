@@ -8,11 +8,6 @@ public extension NavigationPath {
 
 extension NavigationPath.CodableRepresentation: Codable {
 	public init(from decoder: Decoder) throws {
-		if #available(iOS 16.0, *) {
-			storage = try SwiftUI.NavigationPath.CodableRepresentation(from: decoder)
-			return
-		}
-
 		var container = try decoder.unkeyedContainer()
 		var items: [NavigationPathItem] = []
 
@@ -26,11 +21,6 @@ extension NavigationPath.CodableRepresentation: Codable {
 	}
 
 	public func encode(to encoder: Encoder) throws {
-		if #available(iOS 16.0, *) {
-			try (storage as! SwiftUI.NavigationPath.CodableRepresentation).encode(to: encoder)
-			return
-		}
-
 		var container = encoder.unkeyedContainer()
 
 		try (storage as! [NavigationPathItem]).reversed().forEach { item in

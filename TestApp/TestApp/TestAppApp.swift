@@ -5,7 +5,8 @@ import SwiftUI
 
 @main
 struct TestAppApp: App {
-	let testName = ProcessInfo.processInfo.arguments[1]
+//    let testName = ProcessInfo.processInfo.arguments[1]
+	let testName = "--test-push"
 
 	var body: some Scene {
 		WindowGroup {
@@ -65,9 +66,11 @@ struct PushTestView: View {
 		NavigationStack(path: $path) {
 			Button("Push") { path.append(0) }
 				.navigationTitle("Root Title")
+                .navigationBarTitleDisplayMode(.inline)
 				.backport.navigationDestination(for: Int.self) { _ in
 					Text("Pushed Content")
 						.navigationTitle("Pushed Title")
+                        .navigationBarTitleDisplayMode(.inline)
 				}
 		}
 	}

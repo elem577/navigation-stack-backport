@@ -4,32 +4,19 @@ public struct NavigationStack<Data, Root: View>: View {
 	public let body: AnyView
 
 	public init(@ViewBuilder root: () -> Root) where Data == NavigationPath {
-		if #available(iOS 16.0, *) {
-			body = AnyView(SwiftUI.NavigationStack(root: root))
-		} else {
-			body = AnyView(ImplicitStateView(root: root()))
-		}
+        body = AnyView(ImplicitStateView(root: root()))
 	}
 
 	public init(path: Binding<NavigationPath>, @ViewBuilder root: () -> Root) where Data == NavigationPath {
-		if #available(iOS 16.0, *) {
-			body = AnyView(SwiftUI.NavigationStack(path: path.swiftUIPath, root: root))
-		} else {
-			body = AnyView(AuthorityView(path: path.storage, root: root()))
-		}
+        body = AnyView(AuthorityView(path: path.storage, root: root()))
 	}
 
 	public init(path: Binding<Data>, @ViewBuilder root: () -> Root) where Data: MutableCollection, Data: RandomAccessCollection, Data: RangeReplaceableCollection, Data.Element: Hashable {
-		if #available(iOS 16.0, *) {
-			body = AnyView(SwiftUI.NavigationStack(path: path, root: root))
-		} else {
-			// TODO: implement special homogeneous NavigationPathBox?
-			body = AnyView(AuthorityView(path: Binding {
-				NavigationPathBackport(items: path.wrappedValue.map { .init(value: $0) })
-			} set: {
-				path.wrappedValue = .init($0.items.compactMap { $0.valueAs(Data.Element.self) })
-			}, root: root()))
-		}
+        body = AnyView(AuthorityView(path: Binding {
+            NavigationPathBackport(items: path.wrappedValue.map { .init(value: $0) })
+        } set: {
+            path.wrappedValue = .init($0.items.compactMap { $0.valueAs(Data.Element.self) })
+        }, root: root()))
 	}
 }
 
