@@ -5,6 +5,7 @@ struct NavigationPathBackport {
 extension NavigationPathBackport: Equatable {}
 
 extension NavigationPathBackport: NavigationPathBox {
+    
 	var count: Int { items.count }
 	var isEmpty: Bool { items.isEmpty }
 
@@ -24,4 +25,12 @@ extension NavigationPathBackport: NavigationPathBox {
 	mutating func removeLast(_ k: Int) {
 		items.removeLast(k)
 	}
+    
+    mutating func removeSubrange(_ bounds: Range<Int>) {
+        items.removeSubrange(bounds)
+    }
+    
+    mutating func remove(at: Int) {
+        items.remove(at: at)
+    }
 }

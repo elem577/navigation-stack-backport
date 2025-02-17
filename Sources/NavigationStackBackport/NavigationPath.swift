@@ -30,6 +30,7 @@ public struct NavigationPath {
 }
 
 public extension NavigationPath {
+    
 	mutating func append<V: Hashable>(_ value: V) {
 		box.append(value)
 	}
@@ -41,6 +42,14 @@ public extension NavigationPath {
 	mutating func removeLast(_ k: Int = 1) {
 		box.removeLast(k)
 	}
+    
+    mutating func removeSubrange(_ bounds: Range<Int>) {
+        box.removeSubrange(bounds)
+    }
+    
+    mutating func remove(at: Int) {
+        box.remove(at: at)
+    }
 }
 
 extension NavigationPath: Equatable {

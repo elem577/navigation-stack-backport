@@ -7,5 +7,7 @@ protocol NavigationPathBox {
 
 	mutating func append<V: Hashable>(_ value: V)
 	mutating func append<V>(_ value: V) where V: Hashable, V: Codable
-	mutating func removeLast(_ k: Int)
+    mutating func removeLast(_ k: Int)
+    mutating func removeSubrange(_ bounds: Range<Int>)
+    mutating func remove(at: Int)
 }
