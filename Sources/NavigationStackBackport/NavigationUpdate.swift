@@ -31,7 +31,7 @@ import SwiftUI
 		hostingController.didMove(toParent: navigationController)
 	}
 
-	func commit() {
+    func commit(animated: Bool) {
 		guard changed else { return }
 
 		Task {
@@ -45,7 +45,7 @@ import SwiftUI
 				viewControllers[0].view.removeFromSuperview()
 			}
 
-			navigationController.setViewControllers(viewControllers, animated: true)
+            navigationController.setViewControllers(viewControllers, animated: animated)
 		}
 	}
 }

@@ -67,7 +67,7 @@ extension NavigationAuthority {
 				update.view(presentation.view, at: index)
 			}
 
-			update.commit()
+            update.commit(animated: path.animated)
 			viewControllersCount = update.viewControllers.count
 
 			if path.count > presentation.contextId {
@@ -87,7 +87,7 @@ extension NavigationAuthority {
 		update.viewControllers = Array(update.viewControllers.prefix(path.count + 1))
 		path.items.enumerated().forEach { index, data in update.view(view(for: data, index: index + 1), at: index + 1) }
 
-		update.commit()
+        update.commit(animated: path.animated)
 		viewControllersCount = update.viewControllers.count
 		popPresentations()
 	}
