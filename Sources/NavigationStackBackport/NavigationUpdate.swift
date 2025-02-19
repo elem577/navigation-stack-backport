@@ -45,7 +45,11 @@ import SwiftUI
 				viewControllers[0].view.removeFromSuperview()
 			}
 
-            navigationController.setViewControllers(viewControllers, animated: animated)
+            if animated {
+                navigationController.setViewControllers(viewControllers, animated: true)
+            } else {
+                navigationController.viewControllers = viewControllers
+            }
 		}
 	}
 }
